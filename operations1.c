@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   operations1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/06 13:35:34 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/06 15:07:35 by ancamara         ###   ########.fr       */
+/*   Created: 2025/07/06 15:05:37 by ancamara          #+#    #+#             */
+/*   Updated: 2025/07/06 15:30:03 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
-#include "libft/printf/ft_printf.h"
-#include <stdlib.h>
+#include "push_swap.h"
 
-typedef struct	stack {
-	int				nbr;
-	struct stack	*next;
-} stack;
+void	ft_swap(stack *lst)
+{
+	stack	*tmp_ptr;
+	int		tmp_nbr;
 
-//main
-int	main(int argc, char **argv);
+	tmp_ptr = lst;
+	tmp_nbr = lst->nbr;
+	lst = lst->next;
+	tmp_ptr->nbr = lst->nbr;
+	lst->nbr = tmp_nbr;
+}
 
-//create stack
-stack	*create_list(int argc, char **argv);
+void	ft_push(stack *lst_source, stack *lst_dest)
+{
+	stack	*tmp_ptr;
+	stack	*new_node;
+
+	new_node = lst_source;
+	tmp_ptr = lst_dest;
+	lst_dest = new_node;
+	new_node->next = tmp_ptr;
+}
