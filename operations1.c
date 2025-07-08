@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 15:05:37 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/06 15:30:03 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/08 16:17:22 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ void	ft_swap(stack *lst)
 
 void	ft_push(stack *lst_source, stack *lst_dest)
 {
-	stack	*tmp_ptr;
-	stack	*new_node;
+	//stack	*tmp_ptr;
 
-	new_node = lst_source;
-	tmp_ptr = lst_dest;
-	lst_dest = new_node;
-	new_node->next = tmp_ptr;
+	(void)lst_dest;
+	lst_source->nbr = 0;
+	lst_source = lst_source->next;
+	printf("new start: %d\n", lst_source->nbr);
+	return (lst_source);
 }

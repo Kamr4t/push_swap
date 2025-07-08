@@ -5,7 +5,8 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 MY_SOURCES =	main.c \
-				create_stack.c
+				create_stack.c \
+				operations1.c
 
 MY_OBJECTS = $(MY_SOURCES:.c=.o)
 
