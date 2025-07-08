@@ -24,13 +24,43 @@ void	ft_swap(stack *lst)
 	lst->nbr = tmp_nbr;
 }
 
-void	ft_push(stack *lst_source, stack *lst_dest)
+void	ft_push(stack **lst_dest, stack **lst_source) 
 {
-	//stack	*tmp_ptr;
+	stack	*tmp_stack;
 
-	(void)lst_dest;
-	lst_source->nbr = 0;
-	lst_source = lst_source->next;
-	printf("new start: %d\n", lst_source->nbr);
-	return (lst_source);
+    if (*lst_source == NULL)
+        return;
+    tmp_stack = *lst_source;
+    *lst_source = (*lst_source)->next;
+    tmp_stack->next = *lst_dest;
+    *lst_dest = tmp_stack;
+}
+
+void	ft_rotate(stack **lst)
+{
+	stack	*first;
+	stack	*last;
+
+	first = *lst;
+	last = *lst;
+	while (last->next != NULL)
+		last = last->next;
+	*lst = first->next;
+	first->next = NULL;
+	last->next = first;
+}
+
+void	ft_reverse_rotate(stack **lst)
+{
+	stack *prev = NULL;
+	stack *last = *lst;
+
+	while (last->next)
+	{
+		prev = last;
+		last = last->next;
+	}
+	prev->next = NULL;
+	last->next = *lst;
+	*lst = last;
 }

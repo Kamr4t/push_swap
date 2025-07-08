@@ -15,9 +15,8 @@
 int	main(int argc, char **argv)
 {
 	stack	*lst_a;
-	stack	*lst_b;
+	//stack	*lst_b;
 
-	lst_b = NULL;
 	if (argc < 2)
 	{
 		ft_printf("Inavalid Arguments!", argc);
@@ -25,8 +24,11 @@ int	main(int argc, char **argv)
 	}
 	else
 		lst_a = create_list(argc, argv);
-	ft_swap(lst_a);
-	lst_a = (lst_a, lst_b);
+	//lst_b = create_list(argc, argv);
+	//ft_swap(lst_a);
+	//ft_push(&lst_b, &lst_a);
+	//ft_rotate(&lst_a);
+	ft_reverse_rotate(&lst_a);
 	while (lst_a->next != NULL)
 	{
 		printf("%d\n", lst_a->nbr);

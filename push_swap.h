@@ -27,4 +27,6 @@ stack	*create_list(int argc, char **argv);
 
 //opeartions1
 void	ft_swap(stack *lst);
-void	ft_push(stack *lst_source, stack *lst_dest);
+void	ft_push(stack **lst_dest, stack **lst_source);
+void	ft_rotate(stack **lst);
+void	ft_reverse_rotate(stack **lst);
