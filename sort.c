@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 17:55:48 by codespace         #+#    #+#             */
-/*   Updated: 2025/07/09 11:21:20 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/09 11:55:36 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,19 @@ int	operation_counter(void)
 	return (count);
 }
 
-void	add_info(stack *lst)
+int	*add_info(stack *lst)
 {
 	int		tmp_nbr;
 	int		i;
 	int		*info_array;
 
+	info_array = malloc(10 * sizeof(int));
+	i = 0;
+	while (i < 10)
+	{
+		info_array[i] = 0;
+		i++;
+	}
 	while (lst->next != NULL)
 	{
 		i = 0;
@@ -36,8 +43,10 @@ void	add_info(stack *lst)
 			tmp_nbr /= 10;
 			i++;
 		}
+		info_array[i - 1]++;
 		lst->digit_count = i;
 		lst = lst->next;
 	}
+	return (info_array);
 }
 
