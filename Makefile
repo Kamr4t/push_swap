@@ -6,7 +6,8 @@ CFLAGS = -Wall -Wextra -Werror
 
 MY_SOURCES =	main.c \
 				create_stack.c \
-				operations1.c
+				operations1.c \
+				sort.c
 
 MY_OBJECTS = $(MY_SOURCES:.c=.o)
 

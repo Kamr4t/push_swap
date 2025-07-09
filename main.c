@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 13:34:10 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/08 16:18:01 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/09 10:58:01 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	main(int argc, char **argv)
 {
 	stack	*lst_a;
-	//stack	*lst_b;
 
 	if (argc < 2)
 	{
@@ -24,16 +23,11 @@ int	main(int argc, char **argv)
 	}
 	else
 		lst_a = create_list(argc, argv);
-	//lst_b = create_list(argc, argv);
-	//ft_swap(lst_a);
-	//ft_push(&lst_b, &lst_a);
-	//ft_rotate(&lst_a);
-	ft_reverse_rotate(&lst_a);
+	add_info(lst_a);
 	while (lst_a->next != NULL)
 	{
-		printf("%d\n", lst_a->nbr);
+		ft_printf("Number: %d\ndigit count: %d\nFirst Number: %d\n", lst_a->nbr, lst_a->digit_count, lst_a->first_digit);
 		lst_a = lst_a->next;
 	}
-	printf("%d\n", lst_a->nbr);
 	return (0);
 }
