@@ -1,39 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   helper.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/06 13:34:10 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/10 13:48:01 by ancamara         ###   ########.fr       */
+/*   Created: 2025/07/10 13:25:19 by ancamara          #+#    #+#             */
+/*   Updated: 2025/07/10 13:38:47 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int argc, char **argv)
+void	ft_lst_print_nbr(stack *lst)
 {
-	stack	*lst_a;
-	stack	*lst_b;
-	int		**info_array;
-	//int		i;
-	int		is_sorted;
+	stack	*tmp;
 
-	lst_b = NULL;
-	if (argc < 2)
+	tmp = lst;
+	while (tmp->next != NULL)
 	{
-		ft_printf("Inavalid Arguments!", argc);
-		return (0);
+		ft_printf("Nbr: %d\n", tmp->nbr);
+		tmp = tmp->next;
 	}
-	else
-		lst_a = create_list(argc, argv);
-	info_array = add_info(lst_a);
-	is_sorted = 0;
-	while (is_sorted != 1)
-	{
-		is_sorted = ft_sort_loop(&lst_a, &lst_b, info_array);
-	}
-	ft_printf("%d\n", operation_counter() - 1);
-	return (0);
+	ft_printf("Nbr: %d\n", tmp->nbr);
 }

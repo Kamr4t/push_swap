@@ -6,22 +6,24 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 15:05:37 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/08 16:17:22 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/10 14:18:03 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_swap(stack *lst)
+void	ft_swap(stack **lst)
 {
+	stack	*lst_ptr;
 	stack	*tmp_ptr;
 	int		tmp_nbr;
 
-	tmp_ptr = lst;
-	tmp_nbr = lst->nbr;
-	lst = lst->next;
-	tmp_ptr->nbr = lst->nbr;
-	lst->nbr = tmp_nbr;
+	lst_ptr = *lst;
+	tmp_ptr = lst_ptr;
+	tmp_nbr = lst_ptr->nbr;
+	lst = &lst_ptr->next;
+	tmp_ptr->nbr = lst_ptr->nbr;
+	lst_ptr->nbr = tmp_nbr;
 }
 
 void	ft_push(stack **lst_dest, stack **lst_source) 
