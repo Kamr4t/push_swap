@@ -6,13 +6,14 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 13:35:34 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/10 16:24:09 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/16 15:05:34 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "libft/printf/ft_printf.h"
 #include <stdlib.h>
+#include <stdbool.h>
 
 typedef struct	stack {
 	int				nbr;
@@ -26,7 +27,7 @@ typedef struct s_data {
 	int		len_a;
 	stack	**lst_b;
 	int		len_b;
-	int		**info_array;
+	int		info_array[2][10];
 } t_data;
 
 
@@ -37,14 +38,17 @@ int		main(int argc, char **argv);
 stack	*create_list(int argc, char **argv);
 
 //opeartions1
-void	ft_swap(stack **lst);
-void	ft_push(stack **lst_dest, stack **lst_source);
-void	ft_rotate(stack **lst);
-void	ft_reverse_rotate(stack **lst);
+void	ft_swap(stack ***lst);
+void	ft_push(stack ***lst_dest, stack ***lst_source);
+void	ft_rotate(stack ***lst);
+void	ft_reverse_rotate(stack ***lst);
 
 //sort
-int		operation_counter(void);
-int		ft_sort_loop(t_data **data);
+void	ft_sort_loop(t_data *data);
 
 //helper
-void	ft_lst_print_nbr(stack *lst);
+void	ft_lst_print_nbr(stack **lst);
+void	ft_print_array(int	array[2][10]);
+int		operation_counter(void);
+void	lst_len_add(t_data *data);
+bool	is_sorted_b(stack **lst);
