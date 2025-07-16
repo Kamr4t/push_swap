@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 13:35:34 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/10 14:44:35 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/10 16:24:09 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,15 @@ typedef struct	stack {
 	int				first_digit;
 	struct stack	*next;
 } stack;
+
+typedef struct s_data {
+	stack	**lst_a;
+	int		len_a;
+	stack	**lst_b;
+	int		len_b;
+	int		**info_array;
+} t_data;
+
 
 //main
 int		main(int argc, char **argv);
@@ -35,9 +44,7 @@ void	ft_reverse_rotate(stack **lst);
 
 //sort
 int		operation_counter(void);
-int		ft_sort_loop(stack *lst_a, stack *lst_b, int **info);
-int		**add_info(stack *lst);
-void	ft_sort_digit_count(stack **lst_a, stack **lst_b, int *info, int position);
+int		ft_sort_loop(t_data **data);
 
 //helper
 void	ft_lst_print_nbr(stack *lst);
