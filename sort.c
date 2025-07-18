@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 17:55:48 by codespace         #+#    #+#             */
-/*   Updated: 2025/07/18 15:22:08 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/18 16:31:04 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,28 +28,28 @@ int	is_sorted(stack *lst)
 	return (1);
 }
 
-void	ft_sort_by_first_nbr(t_data ***data)
+void	ft_sort_by_first_nbr(t_data ***data, int i, int j)
 {
-	(void)data;
-	// int		index;
-	// int		check;
-	// stack	***lst;
+	stack	***lst_a;
+	int		index;
 
-	// lst = &(*(*data))->lst_a;
-	// index = 1;
-	// while ((*(*data))->info_array[i][j] > 0)
-	// {
-	// 	if ((*(*lst))->digit_count == (j + 1) && (*(*data))->info_array[i][j] <= power_of(index))
-	// 	{
-	// 		check = 1;
-	// 		while (check <= index && check_digit((*(*lst))->nbr, check))
-	// 		{
-	// 			check++;
-	// 		}
-	// 	}
-	// 	(*(*data))->info_array[i][j]--; //correct position?
-	// 	index++;
-	// }
+	lst_a = &(*(*data))->lst_a;
+	while ((*(*data))->info_array[i][j] > 0)
+	{
+		index = 1;
+		while (index < 10)
+		{
+			if ((*(*lst_a))->first_digit == index)
+			{
+				(*(*data))->len_b++;
+				ft_push(&(*(*data))->lst_b, (&(*(*data))->lst_a));
+				(*(*data))->info_array[i][j]--;
+			}
+			index++;
+		}
+		if((*(*data))->info_array[i][j] != 0)
+			ft_reverse_rotate(&(*(*data))->lst_a);
+	}
 }
 
 /*
@@ -68,11 +68,13 @@ if (i == digit count)
 //add check for minus and plus
 void ft_sort_by_digit(t_data **data, int i, int j)
 {
+	//change later for cleaner code, not 2 functions that almost do the same
+	//just split negative and postive numbers
 	stack	***lst_a;
 
 	lst_a = &(*data)->lst_a;
 	if ((*data)->info_array[i][j] > 10)
-		ft_sort_by_first_nbr(&data);
+		ft_sort_by_first_nbr(&data, i, j);
 	else
 	{
 		while ((*data)->info_array[i][j] > 0)
@@ -94,12 +96,10 @@ void ft_sort_by_digit_n(t_data **data, int i, int j)
 	//change later for cleaner code, not 2 functions that almost do the same
 	//just split negative and postive numbers
 	stack	***lst_a;
-	stack	***lst_b;
 
 	lst_a = &(*data)->lst_a;
-	lst_b = &(*data)->lst_b;
 	if ((*data)->info_array[i][j] > 10)
-		ft_sort_by_first_nbr(&data);
+		ft_sort_by_first_nbr(&data, i, j);
 	else
 	{
 		while ((*data)->info_array[i][j] > 0)
