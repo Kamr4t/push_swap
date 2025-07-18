@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 17:55:48 by codespace         #+#    #+#             */
-/*   Updated: 2025/07/18 16:31:04 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/18 17:28:39 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,42 +28,56 @@ int	is_sorted(stack *lst)
 	return (1);
 }
 
+/*
+postive numbers fail because i minus is done first and info stack doesnt work as intented i guess
+perhaps again have different functions for negative and positive
+while loop needs a stop point
+needs to sort the b stack after getting all numbers sorted by first digit
+new array for count of same first digits per digit count????
+doesnt make sense
+*/
+
 void	ft_sort_by_first_nbr(t_data ***data, int i, int j)
 {
 	stack	***lst_a;
 	int		index;
+	int		test;
 
+	test = 0;
 	lst_a = &(*(*data))->lst_a;
-	while ((*(*data))->info_array[i][j] > 0)
+	while (test < 100)
 	{
-		index = 1;
-		while (index < 10)
+		test++;
+		if ((*(*lst_a))->digit_count == (j + 1))
 		{
-			if ((*(*lst_a))->first_digit == index)
+			index = 1;
+			while (index < 10)
 			{
-				(*(*data))->len_b++;
-				ft_push(&(*(*data))->lst_b, (&(*(*data))->lst_a));
-				(*(*data))->info_array[i][j]--;
+				if ((*(*lst_a))->first_digit == index)
+				{
+					(*(*data))->len_b++;
+					ft_push((&(*(*data))->lst_b), (&(*(*data))->lst_a));
+					(*(*data))->info_array[i][j]--;
+				}
+				index++;
 			}
-			index++;
 		}
-		if((*(*data))->info_array[i][j] != 0)
+		else
 			ft_reverse_rotate(&(*(*data))->lst_a);
 	}
 }
 
 /*
-while (i < digit position to check && check true)
- function ()
-  if (digit position = needed number to sort)
-  	return true
-  else
-   return false
-   i++;
-if (i == digit count)
-	move to b
-
+if array > 10
+	while ((*(*data))->info_array[i][j] > 0)
+		if ((*(*lst_a))->digit_count == (j + 1))
+			while intex > 0 or whatever
+				if (*(*lst_a))->first_digit == sort
+					push and etc
+		else
+			reverse rotate
 */
+
 
 //add check for minus and plus
 void ft_sort_by_digit(t_data **data, int i, int j)
