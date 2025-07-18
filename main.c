@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 13:34:10 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/17 10:57:02 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/18 12:08:12 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,11 @@ int	main(int argc, char **argv)
 	
 	lst_b = NULL;
 	if (argc < 2)
-	{
-		ft_printf("Inavalid Arguments!", argc);
 		return (0);
-	}
 	else
 		lst_a = create_list(argc, argv);
+	if (is_sorted(lst_a))
+		return (0);
 	data.lst_a = &lst_a;
 	data.lst_b = &lst_b;
 	add_info(lst_a, &data);

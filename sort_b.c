@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 08:03:34 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/18 09:43:47 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/18 15:17:05 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ void	insertion_sort(t_data ***data, int i)
 	}
 }
 
-//does not include 0 atm
 static int	count_array(int array[10])
 {
+	//does not include 0 atm
 	int	i;
 	int	count;
 
@@ -92,13 +92,15 @@ void	ft_sort_stack_b(t_data **data)
 	int		array[10];
 	int		i;
 
+	lst = &(*data)->lst_b;
+	if ((*data)->len_b <= 1)
+		return ;
 	i = 0;
 	while (i < 10)
 	{
 		array[i] = 0;
 		i++;
 	}
-	lst = &(*data)->lst_b;
 	while ((*data)->len_b != count_array(array))
 	{
 		i = insert_array(array, (*(*lst))->nbr);
