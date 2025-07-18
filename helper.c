@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 13:25:19 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/16 15:02:45 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/18 09:41:32 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ void	ft_lst_print_nbr(stack **lst)
 	while (tmp->next != NULL)
 	{
 		ft_printf("Nbr: %d\n", tmp->nbr);
-		ft_printf("Digit Count: %d\n", tmp->digit_count);
+		//ft_printf("Digit Count: %d\n", tmp->digit_count);
 		tmp = tmp->next;
 	}
 	ft_printf("Nbr: %d\n", tmp->nbr);
-	ft_printf("Digit Count: %d\n", tmp->digit_count);
+	//ft_printf("Digit Count: %d\n", tmp->digit_count);
 }
 
 void	ft_print_array(int	array[2][10])
@@ -69,18 +69,4 @@ void	lst_len_add(t_data *data)
 		}
 		i++;
 	}
-}
-
-bool	is_sorted_b(stack **lst)
-{
-	stack	*second;
-
-	while (!(*lst)->next)
-	{
-		second = (*lst)->next;
-		if ((*lst)->nbr < second->nbr);
-			return (false);
-		*lst = second;
-	}
-	return (true);
 }

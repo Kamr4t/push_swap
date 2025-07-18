@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 13:34:10 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/16 14:36:56 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/17 10:57:02 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ int	main(int argc, char **argv)
 	lst_len_add(&data);
 	data.len_b = 0;
 	ft_sort_loop(&data);
-	// ft_printf("list a:\n");
-	// ft_lst_print_nbr(data.lst_a);
+	ft_printf("list a:\n");
+	ft_lst_print_nbr(data.lst_a);
 	// ft_printf("list b:\n");
 	// ft_lst_print_nbr(data.lst_b);
 	ft_printf("Operations: %d\n", operation_counter() - 1);

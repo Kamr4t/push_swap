@@ -6,14 +6,13 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 13:35:34 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/16 15:05:34 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/17 11:25:09 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "libft/printf/ft_printf.h"
 #include <stdlib.h>
-#include <stdbool.h>
 
 typedef struct	stack {
 	int				nbr;
@@ -46,9 +45,12 @@ void	ft_reverse_rotate(stack ***lst);
 //sort
 void	ft_sort_loop(t_data *data);
 
+//sort b
+void	ft_sort_stack_b(t_data **data);
+void	ft_push_b_to_a(t_data **data);
+
 //helper
 void	ft_lst_print_nbr(stack **lst);
 void	ft_print_array(int	array[2][10]);
 int		operation_counter(void);
 void	lst_len_add(t_data *data);
-bool	is_sorted_b(stack **lst);

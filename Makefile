@@ -8,7 +8,8 @@ MY_SOURCES =	main.c \
 				create_stack.c \
 				operations1.c \
 				sort.c \
-				helper.c
+				helper.c \
+				sort_b.c
 
 MY_OBJECTS = $(MY_SOURCES:.c=.o)
 

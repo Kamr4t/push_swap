@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 17:55:48 by codespace         #+#    #+#             */
-/*   Updated: 2025/07/16 15:36:33 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/18 09:37:11 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_sort_by_first_nbr(t_data ***data)
 	ft_printf("sort by first nbr\n");
 }
 
-void	ft_sort_by_digit(t_data **data, int i, int j)
+void ft_sort_by_digit(t_data **data, int i, int j)
 {
 	stack	***lst_a;
 	stack	***lst_b;
@@ -44,50 +44,17 @@ void	ft_sort_by_digit(t_data **data, int i, int j)
 		ft_sort_by_first_nbr(&data);
 	else
 	{
-		//ft_printf("sort by digit\n");
 		while ((*data)->info_array[i][j] > 0)
 		{
 			if ((*(*lst_a))->digit_count == (j + 1))
 			{
-				if (!**lst_b || (**lst_a)->nbr > (**lst_b)->nbr)
-				{
-					(*data)->len_b++;
-					ft_push((&(*data)->lst_b), (&(*data)->lst_a));
-				}
-				else
-				{
-					(*data)->len_b++;
-					ft_push((&(*data)->lst_b), (&(*data)->lst_a));
-					ft_rotate((&(*data)->lst_b));
-				}
+				(*data)->len_b++;
+				ft_push((&(*data)->lst_b), (&(*data)->lst_a));
 				(*data)->info_array[i][j]--;
 			}
 			else
-			{
 				ft_reverse_rotate(&(*data)->lst_a);
-			}
 		}
-	}
-}
-
-void	ft_sort_stack_b(t_data **data)
-{
-	stack	**lst_b;
-	stack	*second;
-
-	lst_b = (*data)->lst_b;
-	second = (*lst_b)->next;
-	if ((*data)->len_b > 1)
-	{
-		while (is_sorted_b(data))
-		{
-			/* code */
-		}
-		
-	}
-	else
-	{
-		ft_push((&(*data)->lst_a), (&(*data)->lst_b));
 	}
 }
 
@@ -102,15 +69,18 @@ void	ft_sort_loop(t_data *data)
 		{
 			ft_sort_by_digit(&data, 1 , i);
 			ft_sort_stack_b(&data);
+			ft_push_b_to_a(&data);
 		}
 		i--;
 	}
-	i = 9;
+	i = 0;
 	while (i <= 9)
 	{
 		if (data->info_array[0][i] > 0)
 		{
 			ft_sort_by_digit(&data, 0 , i);
+			ft_sort_stack_b(&data);
+			ft_push_b_to_a(&data);
 		}
 		i++;
 	}
