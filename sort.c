@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 17:55:48 by codespace         #+#    #+#             */
-/*   Updated: 2025/07/19 14:08:37 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/19 15:09:50 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void	ft_sort_by_first_nbr(t_data ***data, int i, int j)
 			function(*data, nbr_info, j + 1, sort_n);
 			while (nbr_info[0] > 0)
 			{
+				//if it isnt sorted by first digit it doesnt work because he want to sort by the 2nd digits, without using the first digit
 				if ((*(*lst))->nbr / power_of(nbr_info[1] - 1) == sort_n && (*(*lst))->digit_count == (j + 1))
 				{
 					(*(*data))->len_b++;
