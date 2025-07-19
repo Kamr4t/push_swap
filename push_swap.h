@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 13:35:34 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/18 14:54:56 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/19 11:34:41 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,3 @@ void	ft_lst_print_nbr(stack **lst);
 void	ft_print_array(int	array[2][10]);
 int		operation_counter(void);
 void	lst_len_add(t_data *data);
-int		power_of(int power);

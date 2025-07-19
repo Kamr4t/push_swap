@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 17:55:48 by codespace         #+#    #+#             */
-/*   Updated: 2025/07/18 17:28:39 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/19 14:08:37 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,35 +35,86 @@ while loop needs a stop point
 needs to sort the b stack after getting all numbers sorted by first digit
 new array for count of same first digits per digit count????
 doesnt make sense
+add a function that loops the list and return number of the same first digit
 */
+
+int	power_of(int power)
+{
+	int	base10;
+	int	i;
+
+	i = 1;
+	base10 = 10;
+	while (i < power)
+	{
+		base10 *= 10;
+		i++;
+	}
+	return (base10);
+}
+
+void	function(t_data **data, int nbr_info[2], int digit_count, int nbr)
+{
+	stack	*lst;
+	int		cpy_count;
+
+	cpy_count = digit_count;
+	while (1)
+	{
+		nbr_info[0] = 0;
+		nbr_info[1] = 0;
+		lst = *(*data)->lst_a;
+		while (lst)
+		{
+			if (lst->nbr / power_of(digit_count - 1) == nbr && lst->digit_count == cpy_count)
+				nbr_info[0]++;
+			lst = lst->next;
+		}
+		nbr_info[1] = digit_count;
+		if (nbr_info[0] <= 10)
+			return ;
+		else
+			digit_count--;
+	}
+	//added free to cpy???
+}
+
+// nbr info[2]
+// nbr info[0] = how many numbers of the digit are in the list
+// nbr info[1] = position of digit to work with
 
 void	ft_sort_by_first_nbr(t_data ***data, int i, int j)
 {
-	stack	***lst_a;
-	int		index;
-	int		test;
-
-	test = 0;
-	lst_a = &(*(*data))->lst_a;
-	while (test < 100)
+	stack	***lst;
+	int		nbr_info[2];
+	int		sort_n;
+	
+	sort_n = 9;
+	lst = &(*(*data))->lst_a;
+	while ((*(*data))->info_array[i][j] > 0)
 	{
-		test++;
-		if ((*(*lst_a))->digit_count == (j + 1))
+		while (sort_n >= 0)
 		{
-			index = 1;
-			while (index < 10)
+			function(*data, nbr_info, j + 1, sort_n);
+			while (nbr_info[0] > 0)
 			{
-				if ((*(*lst_a))->first_digit == index)
+				if ((*(*lst))->nbr / power_of(nbr_info[1] - 1) == sort_n && (*(*lst))->digit_count == (j + 1))
 				{
 					(*(*data))->len_b++;
 					ft_push((&(*(*data))->lst_b), (&(*(*data))->lst_a));
 					(*(*data))->info_array[i][j]--;
+					nbr_info[0]--;
 				}
-				index++;
+				else
+					ft_reverse_rotate(&(*(*data))->lst_a);
 			}
+			if ((*(*data))->len_b > 0)
+			{
+				ft_sort_stack_b(*data);
+				ft_push_b_to_a(*data);
+			}
+			sort_n--;
 		}
-		else
-			ft_reverse_rotate(&(*(*data))->lst_a);
 	}
 }
 

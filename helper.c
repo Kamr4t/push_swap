@@ -6,23 +6,11 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 13:25:19 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/18 14:55:40 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/19 11:34:36 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	power_of(int power)
-{
-	int	i;
-	int	base10;
-
-	i = 1;
-	base10 = 10;
-	while (i < power)
-		base10 *= base10;
-	return (base10);
-}
 
 void	ft_lst_print_nbr(stack **lst)
 {
