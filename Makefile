@@ -7,7 +7,10 @@ CFLAGS = -Wall -Wextra -Werror
 MY_SOURCES =	main.c \
 				debugging.c \
 				helper.c \
-				create_stack.c
+				create_stack.c \
+				find_index.c \
+				operations.c \
+				sort.c
 
 MY_OBJECTS = $(MY_SOURCES:.c=.o)
 

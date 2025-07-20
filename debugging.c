@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 17:12:17 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/19 17:14:13 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/20 11:08:42 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,27 +20,20 @@ void	ft_lst_print_nbr(stack **lst, char *lst_name)
 		return ;
 	tmp = *lst;
 	ft_printf("%s\n", lst_name);
-	while (tmp->next != NULL)
+	while (tmp)
 	{
 		ft_printf("Nbr: %d\n", tmp->nbr);
-		//ft_printf("Digit Count: %d\n", tmp->digit_count);
+		//ft_printf("index: %d\n", tmp->index);
 		tmp = tmp->next;
 	}
-	ft_printf("Nbr: %d\n", tmp->nbr);
-	//ft_printf("Digit Count: %d\n", tmp->digit_count);
 }
 
-void	ft_print_array(int	array[2][10])
+void	ft_print_array(int *array, int len)
 {
 	ft_printf("Array for -digits: ");
-	for (size_t i = 0; i < 10; i++)
+	for (int i = 0; i < len; i++)
 	{
-		ft_printf("%d, ", array[0][i]);
-	}
-	ft_printf("\nArray for +digits: ");
-	for (size_t i = 0; i < 10; i++)
-	{
-		ft_printf("%d, ", array[1][i]);
+		ft_printf("%d, ", array[i]);
 	}
 	ft_printf("\n");
 }

@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 13:25:19 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/19 17:18:11 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/20 13:18:27 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,20 @@ int	operation_counter(void)
 	return (count);
 }
 
+int	lst_len(t_data *data)
+{
+	int		i;
+	stack	*lst;
 
+	i = 0;
+	lst = *(data->lst_a);
+	while (lst)
+	{
+		i++;
+		lst = lst->next;
+	}
+	return (i);
+}
 
 int	is_sorted(stack *lst)
 {
