@@ -6,9 +6,12 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 17:12:17 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/20 11:08:42 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/22 15:23:48 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+//./push_swap $(shuf -i 1-50 -n 50)
+// for testing with random numbers
 
 #include "push_swap.h"
 
@@ -22,8 +25,8 @@ void	ft_lst_print_nbr(stack **lst, char *lst_name)
 	ft_printf("%s\n", lst_name);
 	while (tmp)
 	{
-		ft_printf("Nbr: %d\n", tmp->nbr);
-		//ft_printf("index: %d\n", tmp->index);
+		//ft_printf("Nbr:   %d\n", tmp->nbr);
+		ft_printf("index: %d\n", tmp->index);
 		tmp = tmp->next;
 	}
 }

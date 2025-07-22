@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 13:34:10 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/20 12:16:42 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/22 15:23:57 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	main(int argc, char **argv)
 	data.lst_b = &lst_b;
 	find_index(&data);
 	main_sort(&data);
-	ft_lst_print_nbr(data.lst_b, "List B");
 	ft_printf("Operations: %d\n", operation_counter() - 1);
 
 	return (0);

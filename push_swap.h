@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 13:35:34 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/20 15:07:56 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/22 15:27:30 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,14 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+//direction:
+//  1 = rotate
+// -1 = reverse rotate
 typedef struct	stack {
 	int				nbr;
 	int				index;
+	int				operations;
+	int				direction;
 	struct stack	*next;
 } stack;
 

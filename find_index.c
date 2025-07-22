@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 09:42:03 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/20 15:07:47 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/22 13:55:52 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void	find_index(t_data *data)
 	int	*array;
 
 	data->len_a = lst_len(data);
+	data->len_b = 0;
 	array = sort_array(*(data->lst_a), data->len_a);
 	if (!array)
 		return ;

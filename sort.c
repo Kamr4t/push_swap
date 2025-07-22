@@ -6,63 +6,123 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 11:11:50 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/20 15:10:28 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/22 16:17:32 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	fill_array_b(int *array, int index)
+//remove 
+static int	find_next_index(int *array, int index)
 {
-	
-}
-
-static int	find_next_index(int *array, int index, int used_slots)
-{
-	int	i;
+	int			i;
+	int			tmp;
+	int			next_index;
+	static int	used_slots = 0;
+	int			flag;
 
 	i = 0;
-	//old move array didnt work and broke the code
-	//create new function to fill array b with index in correct order
-	ft_print_array(array, 10);
+	tmp = 0;
+	next_index = 0;
+	flag = 0;
 	while (i < used_slots)
 	{
-		if (index < array[i] && i > 0)
-			return (array[i - 1]);
-		else if (index < array[i] && i == 0)
-			return (array[i]);
+		if (index > array[i])
+		{
+			next_index = array[i];
+			flag = 1;
+			break ;
+		}
 		i++;
 	}
-	return (array[0]);
+	used_slots++;
+	while (i < used_slots)
+	{
+		tmp = array[i];
+		array[i] = index;
+		index = tmp;
+		i++;
+	}
+	if (next_index == 0 && flag == 0)
+		return (array[0]);
+	return (next_index);
 }
+
+//rename to to the new function like operation count add
+static void	add_operation_count_b(t_data **data, int index)
+{
+	int		i;
+	stack	*lst;
+
+	i = 0;
+	lst = *((*data)->lst_b);
+	if (!lst)
+		return ;
+	while (lst->index != index)
+	{
+		lst = lst->next;
+		i++;
+	}
+	if (i < (*data)->len_b / 2)
+	{
+		(*(*(*data)->lst_b)).operations = i;
+		(*(*(*data)->lst_b)).direction = 1;
+	}
+	else
+	{
+		(*(*(*data)->lst_b)).operations = (*data)->len_b - i;
+		(*(*(*data)->lst_b)).direction = -1;
+	}
+}
+
+static void	add_operation_count(t_data **data, int *array)
+{
+	int		i;
+	stack	*lst;
+
+	i = 0;
+	lst = *((*data)->lst_a);
+	while (lst)
+	{
+		add_operation_count_b(data, find_next_index(array, lst->index));
+		if (i < (*data)->len_a / 2)
+		{
+			(*(*(*data)->lst_a)).operations = i;
+			(*(*(*data)->lst_a)).direction = 1;
+		}
+		else
+		{
+			(*(*(*data)->lst_a)).operations = (*data)->len_a - i;
+			(*(*(*data)->lst_a)).direction = -1;
+		}
+			lst = lst->next;
+			i++;
+	}
+}
+
+//sort function 
+//add operation count to every node in b
+//than add operation count to every node in a;
+//than compare by adding a and b, or in case of same direction substract
+//chooses lowest number(safe index of lowest operation count, while count through the lst)
 
 void	main_sort(t_data *data)
 {
 	int		*array;
-	int		i;
-	int		used_slots;
+	int		next_index;
 	stack	*lst_a;
-	stack	*lst_b;
 
+	lst_a = *(data->lst_a);
 	array = ft_calloc(data->len_a, sizeof(int));
 	if (!array)
 		return ;
-	//rework later
-	ft_push(&(data->lst_b), &(data->lst_a));
-	lst_a = *(data->lst_a);
-	lst_b = *(data->lst_b);
-	array[0] = lst_b->index;
-	used_slots = 1;
-	while (used_slots < data->len_a)
+	while (data->len_a > 0)
 	{
-		i = find_next_index(array, lst_a->index, used_slots);
-		while (lst_b && lst_b->index != i)
-		{
-			ft_rotate(&(data->lst_b));
-			lst_b = *(data->lst_b);
-		}
-		ft_push(&(data->lst_b), &(data->lst_a));
-		lst_a = *(data->lst_a);
-		used_slots++;
+		add_operation_count(data, array);
+		// next_index = find_next_index(array, lst_a->index);
+		// rotate_to_index(&data, next_index);
+		// ft_push(&(data->lst_b), &(data)->lst_a);
+		// data->len_a--;
+		// lst_a = *(data->lst_a);
 	}
 }
