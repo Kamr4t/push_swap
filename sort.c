@@ -6,13 +6,14 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 11:11:50 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/22 16:17:32 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/22 16:42:13 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-//remove 
+//remove the insert array to another function
+//also removed used slots
 static int	find_next_index(int *array, int index)
 {
 	int			i;
@@ -48,14 +49,16 @@ static int	find_next_index(int *array, int index)
 	return (next_index);
 }
 
-//rename to to the new function like operation count add
-static void	add_operation_count_b(t_data **data, int index)
+//bullshit adding it to b lst doesnt help at all
+//needs to return the amount of operation needed and add it in the main function to the a lst
+//if directions are the same return the difference
+static int	add_operation_count_b(t_data ***data, int index)
 {
 	int		i;
 	stack	*lst;
 
 	i = 0;
-	lst = *((*data)->lst_b);
+	lst = *((*(*data))->lst_b);
 	if (!lst)
 		return ;
 	while (lst->index != index)
@@ -63,16 +66,8 @@ static void	add_operation_count_b(t_data **data, int index)
 		lst = lst->next;
 		i++;
 	}
-	if (i < (*data)->len_b / 2)
-	{
-		(*(*(*data)->lst_b)).operations = i;
-		(*(*(*data)->lst_b)).direction = 1;
-	}
-	else
-	{
-		(*(*(*data)->lst_b)).operations = (*data)->len_b - i;
-		(*(*(*data)->lst_b)).direction = -1;
-	}
+	//read lst a for dircetion and operations
+	//do the math edit the lst a
 }
 
 static void	add_operation_count(t_data **data, int *array)
@@ -84,7 +79,6 @@ static void	add_operation_count(t_data **data, int *array)
 	lst = *((*data)->lst_a);
 	while (lst)
 	{
-		add_operation_count_b(data, find_next_index(array, lst->index));
 		if (i < (*data)->len_a / 2)
 		{
 			(*(*(*data)->lst_a)).operations = i;
@@ -95,9 +89,16 @@ static void	add_operation_count(t_data **data, int *array)
 			(*(*(*data)->lst_a)).operations = (*data)->len_a - i;
 			(*(*(*data)->lst_a)).direction = -1;
 		}
-			lst = lst->next;
-			i++;
+		add_operation_count_b(&data, find_next_index(array, lst->index));
+		lst = lst->next;
+		i++;
 	}
+}
+
+static int	compare_operations(t_data **data)
+{
+	int	index;
+	
 }
 
 //sort function 
@@ -105,7 +106,6 @@ static void	add_operation_count(t_data **data, int *array)
 //than add operation count to every node in a;
 //than compare by adding a and b, or in case of same direction substract
 //chooses lowest number(safe index of lowest operation count, while count through the lst)
-
 void	main_sort(t_data *data)
 {
 	int		*array;
@@ -118,7 +118,7 @@ void	main_sort(t_data *data)
 		return ;
 	while (data->len_a > 0)
 	{
-		add_operation_count(data, array);
+		add_operation_count(&data, array);
 		// next_index = find_next_index(array, lst_a->index);
 		// rotate_to_index(&data, next_index);
 		// ft_push(&(data->lst_b), &(data)->lst_a);
