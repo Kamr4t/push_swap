@@ -6,159 +6,90 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 11:11:50 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/23 11:00:41 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/23 17:05:01 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	shift_index_array(int *array, int pos, int index, int used_slots)
-{
-	int	tmp;
+//while lst look for least operation count
+//if first in lst a push to b
+//else
+//write function that returns best rotation way for a and b
+//use operation handler? that rotate do needed position and both if needed
+//rotate und both nodes in position
 
-	while (pos < used_slots)
+static int	find_least_op(stack *lst)
+{
+	int		least_op;
+	int		i;
+
+	least_op = lst->operations;
+	while (lst)
 	{
-		tmp = array[pos];
-		array[pos] = index;
-		index = tmp;
-		pos++;
+		if (least_op < lst->operations)
+			least_op = lst->operations;
+		lst = lst->next;
 	}
+	return (least_op);
 }
 
-static int	find_next_index(int *array, int index, bool shift_array)
+static int	node_best_rotate(t_data **data, int pos_a, int pos_b)
 {
-	int			i;
-	int			next_index;
-	static int	used_slots = 0;
-	bool		is_zero;
+	int	len_a;
+	int	len_b;
+	int	results[4];
+	int	i;
 
+	len_a = (*data)->len_a;
+	len_b = (*data)->len_b;
+	results[0] = pos_a - pos_b;
+	results[1] = pos_a - (pos_b - len_b);
+	results[2] = (pos_a  - len_a) - pos_b;
+	results[3] = (pos_a  - len_a) - (pos_b - len_b);
 	i = 0;
-	next_index = 0;
-	is_zero = false;
-	while (i < used_slots)
+	while (i < 4)
 	{
-		if (index > array[i])
-		{
-			next_index = array[i];
-			is_zero = true;
+		if (results[i] < 0)
+			results[i] = - results[i];
+		if (results[i] == least_operations(pos_a, len_a, pos_a, len_b))
 			break ;
-		}
 		i++;
 	}
-	used_slots++;
-	if (next_index == 0 && !is_zero)
-	{
-		if (shift_array)
-			shift_index_array(array, i, array[0], used_slots);
-		return (array[0]);
-	}
-	if (shift_array)
-		shift_index_array(array, i, index, used_slots);
-	return (next_index);
+	return (i);
 }
 
-static void	add_operation_count_b(t_data ***data, int index, int lst_a_nbr)
+static void	node_move(t_data **data, int *array)
 {
-	int		i;
-	stack	*lst_a;
-	stack	*lst_b;
+	stack	*lst;
+	int		pos_a;
+	int		pos_b;
+	int		next_index;
+	int		best_rotate;
 
-	i = 0;
-	lst_a = *((***data).lst_a);
-	lst_b = *((***data).lst_b);
-	if (!lst_b)
-		return ;
-	while (lst_b->index != index)
+	lst = *((*data)->lst_a);
+	lst = *((*data)->lst_a);
+	pos_a = 0;
+	while (lst->operations != find_least_op(*((*data)->lst_a)));
 	{
-		lst_b = lst_b->next;
-		i++;
+		lst = lst->next;
+		pos_a++;
 	}
-	while (lst_a->nbr != lst_a_nbr)
-		lst_a = lst_a->next;
-	if (i < (***data).len_b / 2)
-	{
-		if (lst_a->direction == 1)
-		{
-			lst_a->operations -= i;
-			if (lst_a->operations < 0)
-				lst_a->operations = - lst_a->operations;
-		}
-		else
-		{
-			lst_a->operations += i;
-			lst_a->operations = 0;
-		}
-	}
+	next_index = find_next_index(array, lst->index);
+	pos_b = node_pos(*((*data)->lst_b), next_index, 1);
+	best_rotate = node_best_rotate(data, pos_a, pos_b);
+	if (best_rotate == 0)
+		handler_both_r(&data);
+	else if (best_rotate == 1)
+		handler_a_r_b_rr(&data);
+	else if (best_rotate == 2)
+		handler_a_rr_b_r(&data);
 	else
-	{
-		if (lst_a->direction == -1)
-		{
-			lst_a->operations -= i;
-			if (lst_a->operations < 0)
-				lst_a->operations = - lst_a->operations;
-		}
-		else
-		{
-			lst_a->operations += i;
-			lst_a->operations = 0;
-		}
-	}
+		handler_both_rr(&data);
 }
+//write function for filling the array
+//rotate(handler)
 
-static void	add_operation_count(t_data **data, int *array)
-{
-	int		i;
-	stack	*lst;
-
-	i = 0;
-	(void)array;
-	lst = *((*data)->lst_a);
-	while (lst)
-	{
-		if (i < (*data)->len_a / 2)
-		{
-			(*(*(*data)->lst_a)).operations = i;
-			(*(*(*data)->lst_a)).direction = 1;
-		}
-		else
-		{
-			(*(*(*data)->lst_a)).operations = (*data)->len_a - i;
-			(*(*(*data)->lst_a)).direction = -1;
-		}
-		add_operation_count_b(&data, find_next_index(array, lst->index, false), lst->nbr);
-		lst = lst->next;
-		i++;
-	}
-}
-
-static void	move_node(t_data **data, int *array)
-{
-	stack	*lst;
-	int		op_count;
-
-	op_count = 0;
-	lst = *((*data)->lst_a);
-	op_count = lst->operations;
-	while (lst)
-	{
-		lst = lst->next;
-		if (op_count > lst->operations)
-			op_count = lst->operations;
-	}
-	lst = *((*data)->lst_a);
-	while (lst->operations != op_count)
-		lst = lst->next;
-	while ((*(*(*data)->lst_a)).index != lst->index)
-	{
-		if (lst->direction == 1)
-	}
-}
-
-//sort function 
-//add operation count to every node in b
-//than add operation count to every node in a;
-//than compare by adding a and b, or in case of same direction substract
-//chooses lowest number(safe index of lowest operation count, while count through the lst)
 void	main_sort(t_data *data)
 {
 	int		*array;
@@ -171,8 +102,9 @@ void	main_sort(t_data *data)
 		return ;
 	while (data->len_a > 0)
 	{
-		//ft_push(&(data->lst_b), &(data)->lst_a);
 		add_operation_count(&data, array);
+		//ft_push(&(data->lst_b), &(data)->lst_a);
+		
 		// next_index = find_next_index(array, lst_a->index);
 		// rotate_to_index(&data, next_index);
 		// ft_push(&(data->lst_b), &(data)->lst_a);

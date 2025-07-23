@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 17:12:17 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/23 10:12:09 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/23 13:11:24 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,12 @@ void	ft_print_array(int *array, int len)
 		ft_printf("%d, ", array[i]);
 	}
 	ft_printf("\n");
+}
+
+int	operation_counter(void)
+{
+	static int	count = 0;
+
+	count++;
+	return (count);
 }

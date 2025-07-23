@@ -6,19 +6,13 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 13:25:19 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/20 13:18:27 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/23 15:36:28 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	operation_counter(void)
-{
-	static int	count = 0;
 
-	count++;
-	return (count);
-}
 
 int	lst_len(t_data *data)
 {
@@ -49,4 +43,59 @@ int	is_sorted(stack *lst)
 		lst = lst->next;
 	}
 	return (1);
+}
+//lst_member
+// 0 = nbr
+// 1 = index
+// 2 = operations
+int	node_pos(stack *lst, int value, int lst_member)
+{
+	int	i;
+
+	i = 0;
+	if (lst_member == 0)
+		while (lst->nbr != value)
+		{
+			lst = lst->next;
+			i++;
+		}
+	else if (lst_member == 1)
+		while (lst->index != value)
+		{
+			lst = lst->next;
+			i++;
+		}
+	else if (lst_member == 2)
+		while (lst->operations != value)
+		{
+			lst = lst->next;
+			i++;
+		}
+	return (i);
+}
+
+int	find_next_index(int *array, int index)
+{
+	int			i;
+	int			next_index;
+	static int	used_slots = 0;
+	bool		is_zero;
+
+	i = 0;
+	next_index = 0;
+	is_zero = false;
+	while (i < used_slots)
+	{
+		if (index > array[i])
+		{
+			next_index = array[i];
+			is_zero = true;
+			break ;
+		}
+		i++;
+	}
+	used_slots++;
+	if (next_index == 0 && !is_zero)
+		return (array[0]);
+	return (next_index);
 }

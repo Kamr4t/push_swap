@@ -10,7 +10,8 @@ MY_SOURCES =	main.c \
 				create_stack.c \
 				find_index.c \
 				operations.c \
-				sort.c
+				sort.c \
+				operation_count.c
 
 MY_OBJECTS = $(MY_SOURCES:.c=.o)
 

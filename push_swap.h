@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 13:35:34 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/22 15:27:30 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/23 17:03:53 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,25 @@ typedef struct s_data {
 //main			1
 int		main(int argc, char **argv);
 
+//operation handler
+void	handler_both_r(t_data ***data);
+void	handler_a_r_b_rr(t_data ***data);
+void	handler_a_rr_b_r(t_data ***data);
+void	handler_both_rr(t_data ***data);
+
 //debugging		2
 void	ft_lst_print_nbr(stack **lst, char *lst_name);
 void	ft_print_array(int *array, int len);
+int		operation_counter(void);
 
 //create list	3
 stack	*create_list(int argc, char **argv);
 
 //helper		2
 int		is_sorted(stack *lst);
-int		operation_counter(void);
 int		lst_len(t_data *data);
+int		node_pos(stack *lst, int value, int lst_member);
+int		find_next_index(int *array, int index);
 
 //find index
 void	find_index(t_data *data);
@@ -60,3 +68,7 @@ void	ft_reverse_rotate(stack ***lst);
 
 //sort
 void	main_sort(t_data *data);
+
+//operation count
+void	add_operation_count(t_data **data, int *array);
+int		least_operations(int a_index, int a_len, int b_index, int b_len);
