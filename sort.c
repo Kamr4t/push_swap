@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 11:11:50 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/25 11:14:15 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/25 12:57:57 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	find_least_op(stack *lst)
 	least_op = lst->operations;
 	while (lst)
 	{
-		if (least_op < lst->operations)
+		if (least_op > lst->operations)
 			least_op = lst->operations;
 		lst = lst->next;
 	}
@@ -51,6 +51,7 @@ static int	node_best_rotate(t_data **data, int pos_a, int pos_b)
 	{
 		if (results[i] < 0)
 			results[i] = - results[i];
+		ft_printf("result: %d to least: %d\n", results[i], least_operations(pos_a, len_a, pos_a, len_b));
 		if (results[i] == least_operations(pos_a, len_a, pos_a, len_b))
 			break ;
 		i++;
@@ -66,7 +67,7 @@ static void	shift_array(int *array, int index, int next_index, int lst_len)
 	i = 0;
 	while (array[i] != next_index)
 		i++;
-	while (i < lst_len)
+	while (i < lst_len + 1)
 	{
 		tmp = array[i];
 		array[i] = index;
@@ -94,9 +95,12 @@ static void	node_move(t_data **data, int *array)
 	next_index = find_next_index(array, lst->index, (*data)->len_b);
 	pos_b = node_pos(*((*data)->lst_b), next_index, 1);
 	best_rotate = node_best_rotate(data, pos_a, pos_b);
+	ft_printf("best rotate: %d\n", best_rotate);
 	shift_array(array, lst->index, next_index, (*data)->len_b);
-	//if (lstb == NULL)
+	if (lstb == NULL)
 		return ;
+	if (next_index == 0)
+		next_index = array[0];
 	if (best_rotate == 0)
 		handler_both_r(&data, lst->index, next_index);
 	else if (best_rotate == 1)
@@ -110,7 +114,6 @@ static void	node_move(t_data **data, int *array)
 void	main_sort(t_data *data)
 {
 	int		*array;
-	//int		next_index;
 	stack	*lst_a;
 
 	lst_a = *(data->lst_a);

@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 13:25:19 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/25 11:08:09 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/25 12:34:23 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,9 @@ int	find_next_index(int *array, int index, int lst_len)
 	i = 0;
 	next_index = 0;
 	is_zero = false;
-	while (i < lst_len)
+	while (i < lst_len + 1)
 	{
-		if (index > array[i])
+		if (index >= array[i])
 		{
 			next_index = array[i];
 			is_zero = true;

@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 17:12:17 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/23 13:11:24 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/25 12:54:48 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	ft_lst_print_nbr(stack **lst, char *lst_name)
 	ft_printf("%s\n", lst_name);
 	while (tmp)
 	{
-		ft_printf("Nbr:   %d\n", tmp->nbr);
-		//ft_printf("index: %d\n", tmp->index);
-		ft_printf("Operations: %d\n", tmp->operations);
+		//ft_printf("Nbr:   %d\n", tmp->nbr);
+		ft_printf("index: %d\n", tmp->index);
+		//ft_printf("Operations: %d\n", tmp->operations);
 		tmp = tmp->next;
 	}
 }
