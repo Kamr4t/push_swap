@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 11:11:50 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/25 12:57:57 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/25 13:28:38 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,7 @@ static int	node_best_rotate(t_data **data, int pos_a, int pos_b)
 	{
 		if (results[i] < 0)
 			results[i] = - results[i];
-		ft_printf("result: %d to least: %d\n", results[i], least_operations(pos_a, len_a, pos_a, len_b));
-		if (results[i] == least_operations(pos_a, len_a, pos_a, len_b))
+		if (results[i] == least_operations(pos_a, len_a, pos_b, len_b))
 			break ;
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 13:35:34 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/25 10:33:09 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/25 13:26:50 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,4 @@ void	main_sort(t_data *data);
 
 //operation count
 void	add_operation_count(t_data **data, int *array);
-int		least_operations(int a_index, int a_len, int b_index, int b_len);
+int		least_operations(int pos_a, int a_len, int pos_b, int b_len);
