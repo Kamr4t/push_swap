@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 15:05:37 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/20 13:29:06 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/25 10:35:44 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_rotate(stack ***lst)
 	**lst = first->next;
 	first->next = NULL;
 	last->next = first;
-	operation_counter();
+	
 }
 
 void	ft_reverse_rotate(stack ***lst)
@@ -66,5 +66,4 @@ void	ft_reverse_rotate(stack ***lst)
 	prev->next = NULL;
 	last->next = **lst;
 	**lst = last;
-	operation_counter();
 }

@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 11:11:50 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/23 17:05:01 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/25 11:14:15 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 static int	find_least_op(stack *lst)
 {
 	int		least_op;
-	int		i;
 
 	least_op = lst->operations;
 	while (lst)
@@ -59,6 +58,23 @@ static int	node_best_rotate(t_data **data, int pos_a, int pos_b)
 	return (i);
 }
 
+static void	shift_array(int *array, int index, int next_index, int lst_len)
+{
+	int	i;
+	int	tmp;
+
+	i = 0;
+	while (array[i] != next_index)
+		i++;
+	while (i < lst_len)
+	{
+		tmp = array[i];
+		array[i] = index;
+		index = tmp;
+		i++;
+	}
+}
+
 static void	node_move(t_data **data, int *array)
 {
 	stack	*lst;
@@ -68,27 +84,28 @@ static void	node_move(t_data **data, int *array)
 	int		best_rotate;
 
 	lst = *((*data)->lst_a);
-	lst = *((*data)->lst_a);
+	stack *lstb = *((*data)->lst_b);
 	pos_a = 0;
-	while (lst->operations != find_least_op(*((*data)->lst_a)));
+	while (lst->operations != find_least_op(*((*data)->lst_a)))
 	{
 		lst = lst->next;
 		pos_a++;
 	}
-	next_index = find_next_index(array, lst->index);
+	next_index = find_next_index(array, lst->index, (*data)->len_b);
 	pos_b = node_pos(*((*data)->lst_b), next_index, 1);
 	best_rotate = node_best_rotate(data, pos_a, pos_b);
+	shift_array(array, lst->index, next_index, (*data)->len_b);
+	//if (lstb == NULL)
+		return ;
 	if (best_rotate == 0)
-		handler_both_r(&data);
+		handler_both_r(&data, lst->index, next_index);
 	else if (best_rotate == 1)
-		handler_a_r_b_rr(&data);
+		handler_a_r_b_rr(&data, lst->index, next_index);
 	else if (best_rotate == 2)
-		handler_a_rr_b_r(&data);
+		handler_a_rr_b_r(&data, lst->index, next_index);
 	else
-		handler_both_rr(&data);
+		handler_both_rr(&data, lst->index, next_index);
 }
-//write function for filling the array
-//rotate(handler)
 
 void	main_sort(t_data *data)
 {
@@ -103,13 +120,10 @@ void	main_sort(t_data *data)
 	while (data->len_a > 0)
 	{
 		add_operation_count(&data, array);
-		//ft_push(&(data->lst_b), &(data)->lst_a);
-		
-		// next_index = find_next_index(array, lst_a->index);
-		// rotate_to_index(&data, next_index);
-		// ft_push(&(data->lst_b), &(data)->lst_a);
+		node_move(&data, array);
+		ft_push(&(data->lst_b), &(data)->lst_a);
 		data->len_a--;
+		data->len_b++;
 		lst_a = *(data->lst_a);
-		break ;
 	}
 }

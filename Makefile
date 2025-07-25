@@ -2,7 +2,7 @@ NAME = push_swap
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror
+#CFLAGS = -Wall -Wextra -Werror
 
 MY_SOURCES =	main.c \
 				debugging.c \
@@ -11,7 +11,8 @@ MY_SOURCES =	main.c \
 				find_index.c \
 				operations.c \
 				sort.c \
-				operation_count.c
+				operation_count.c \
+				operation_handler.c
 
 MY_OBJECTS = $(MY_SOURCES:.c=.o)
 

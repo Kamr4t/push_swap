@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 13:25:19 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/23 15:36:28 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/25 11:08:09 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	is_sorted(stack *lst)
 	}
 	return (1);
 }
+
 //lst_member
 // 0 = nbr
 // 1 = index
@@ -53,20 +54,22 @@ int	node_pos(stack *lst, int value, int lst_member)
 	int	i;
 
 	i = 0;
+	if (lst == NULL)
+		return (0);
 	if (lst_member == 0)
-		while (lst->nbr != value)
+		while (lst && lst->nbr != value)
 		{
 			lst = lst->next;
 			i++;
 		}
 	else if (lst_member == 1)
-		while (lst->index != value)
+		while (lst && lst->index != value)
 		{
 			lst = lst->next;
 			i++;
 		}
 	else if (lst_member == 2)
-		while (lst->operations != value)
+		while (lst && lst->operations != value)
 		{
 			lst = lst->next;
 			i++;
@@ -74,17 +77,16 @@ int	node_pos(stack *lst, int value, int lst_member)
 	return (i);
 }
 
-int	find_next_index(int *array, int index)
+int	find_next_index(int *array, int index, int lst_len)
 {
 	int			i;
 	int			next_index;
-	static int	used_slots = 0;
 	bool		is_zero;
 
 	i = 0;
 	next_index = 0;
 	is_zero = false;
-	while (i < used_slots)
+	while (i < lst_len)
 	{
 		if (index > array[i])
 		{
@@ -94,7 +96,6 @@ int	find_next_index(int *array, int index)
 		}
 		i++;
 	}
-	used_slots++;
 	if (next_index == 0 && !is_zero)
 		return (array[0]);
 	return (next_index);
