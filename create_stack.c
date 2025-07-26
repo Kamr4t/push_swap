@@ -6,15 +6,15 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 15:05:09 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/22 16:12:40 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/26 16:33:38 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	lst_addback(stack *lst, stack *new_node)
+static void	lst_addback(t_stack *lst, t_stack *new_node)
 {
-	stack	*ptr;
+	t_stack	*ptr;
 
 	while (lst->next != NULL)
 	{
@@ -24,13 +24,13 @@ static void	lst_addback(stack *lst, stack *new_node)
 	lst->next = new_node;
 }
 
-static stack	*lst_new_node_add(stack *lst, char *n)
+static t_stack	*lst_new_node_add(t_stack *lst, char *n)
 {
-	stack	*new_node;
+	t_stack	*new_node;
 	int		nbr;
 
 	nbr = ft_atoi(n);
-	new_node = malloc(sizeof(stack));
+	new_node = malloc(sizeof(t_stack));
 	new_node->nbr = nbr;
 	new_node->direction = 0;
 	new_node->operations = 0;
@@ -42,9 +42,9 @@ static stack	*lst_new_node_add(stack *lst, char *n)
 	return (lst);
 }
 
-stack	*create_list(int argc, char **argv)
+t_stack	*create_list(int argc, char **argv)
 {
-	stack	*lst;
+	t_stack	*lst;
 	char	**array;
 	int		i;
 	

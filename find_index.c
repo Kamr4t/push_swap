@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 09:42:03 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/22 13:55:52 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/26 16:38:03 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	insert_array(int *array, int nbr, int len)
 	}
 }
 
-static int	*sort_array(stack *lst, int lst_len)
+static int	*sort_array(t_stack *lst, int lst_len)
 {
 	//does not handle 0 correct
 	//int	used_slots???
@@ -66,9 +66,9 @@ static int	*sort_array(stack *lst, int lst_len)
 	return (array);
 }
 
-static void	fill_index(stack ***lst, int *array, int len)
+static void	fill_index(t_stack ***lst, int *array, int len)
 {
-	stack	*tmp;
+	t_stack	*tmp;
 	int		i;
 
 	tmp = **lst;

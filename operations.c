@@ -6,41 +6,29 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 15:05:37 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/25 15:10:08 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/26 16:26:38 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_swap(stack ***lst)
+void	ft_push(t_stack ***lst_dest, t_stack ***lst_source)
 {
-	stack	*first;
-	stack	*second;
-
-	first = **lst;
-	second = first->next;
-	first->next = second->next;
-	second->next = first;
-	**lst = second;
-}
-
-void	ft_push(stack ***lst_dest, stack ***lst_source) 
-{
-	stack	*tmp;
+	t_stack	*tmp;
 
 	tmp = **lst_source;
 	**lst_source = tmp->next;
 	tmp->next = **lst_dest;
 	**lst_dest = tmp;
-	ft_printf("pb\n");
 }
 
-void	ft_rotate(stack ***lst)
+void	ft_rotate(t_stack ***lst)
 {
-	stack	*first;
-	stack	*last;
+	t_stack	*first;
+	t_stack	*last;
+
 	if (!lst || !*lst || !**lst || !(**lst)->next)
-		return;
+		return ;
 	first = **lst;
 	last = **lst;
 	while (last->next != NULL)
@@ -48,14 +36,15 @@ void	ft_rotate(stack ***lst)
 	**lst = first->next;
 	first->next = NULL;
 	last->next = first;
-	
 }
 
-void	ft_reverse_rotate(stack ***lst)
+void	ft_reverse_rotate(t_stack ***lst)
 {
-	stack *prev;
-	stack *last;
+	t_stack	*prev;
+	t_stack	*last;
 
+	if (!lst || !*lst || !**lst || !(**lst)->next)
+		return ;
 	prev = NULL;
 	last = **lst;
 	while (last->next)

@@ -6,18 +6,16 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 13:25:19 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/25 12:34:23 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/26 16:35:59 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-
-
 int	lst_len(t_data *data)
 {
 	int		i;
-	stack	*lst;
+	t_stack	*lst;
 
 	i = 0;
 	lst = *(data->lst_a);
@@ -29,7 +27,7 @@ int	lst_len(t_data *data)
 	return (i);
 }
 
-int	is_sorted(stack *lst)
+int	is_sorted(t_stack *lst)
 {
 	int	tmp;
 
@@ -49,31 +47,29 @@ int	is_sorted(stack *lst)
 // 0 = nbr
 // 1 = index
 // 2 = operations
-int	node_pos(stack *lst, int value, int lst_member)
+int	node_pos(t_stack *lst, int value, int lst_member)
 {
 	int	i;
 
 	i = 0;
 	if (lst == NULL)
 		return (0);
-	if (lst_member == 0)
-		while (lst && lst->nbr != value)
-		{
-			lst = lst->next;
-			i++;
-		}
 	else if (lst_member == 1)
+	{
 		while (lst && lst->index != value)
 		{
 			lst = lst->next;
 			i++;
 		}
+	}
 	else if (lst_member == 2)
+	{
 		while (lst && lst->operations != value)
 		{
 			lst = lst->next;
 			i++;
 		}
+	}
 	return (i);
 }
 

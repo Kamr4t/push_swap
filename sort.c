@@ -6,13 +6,17 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 11:11:50 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/26 12:58:24 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/26 16:42:24 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-static int	find_least_op(stack *lst)
+//index 0 is not in the correct position
+//lot of clean up
+//malloc and free
+//0 as a number doesnt work
+//norminette
+static int	find_least_op(t_stack *lst)
 {
 	int		least_op;
 
@@ -24,31 +28,6 @@ static int	find_least_op(stack *lst)
 		lst = lst->next;
 	}
 	return (least_op);
-}
-
-static int	node_best_rotate(t_data **data, int pos_a, int pos_b)
-{
-	int	len_a;
-	int	len_b;
-	int	results[4];
-	int	i;
-
-	len_a = (*data)->len_a;
-	len_b = (*data)->len_b;
-	results[0] = max(pos_a, pos_b);
-	results[1] = pos_a + (len_b - pos_b);
-	results[2] = (len_a - pos_a) + pos_b;
-	results[3] = max(len_a - pos_a, len_b - pos_b);
-	i = 0;
-	while (i < 4)
-	{
-		if (results[i] < 0)
-			results[i] = - results[i];
-		if (results[i] == least_operations(pos_a, len_a, pos_b, len_b))
-			break ;
-		i++;
-	}
-	return (i);
 }
 
 static void	shift_array(int *array, int index, int next_index, int lst_len)
@@ -70,48 +49,70 @@ static void	shift_array(int *array, int index, int next_index, int lst_len)
 
 static void	node_move(t_data **data, int *array)
 {
-	stack	*lst;
-	int		pos_a;
-	int		pos_b;
+	t_stack	*lst_a;
 	int		next_index;
 	int		best_rotate;
 
-	lst = *((*data)->lst_a);
-	stack *lstb = *((*data)->lst_b);
-	pos_a = 0;
-	while (lst->operations != find_least_op(*((*data)->lst_a)))
-	{
-		lst = lst->next;
-		pos_a++;
-	}
-	next_index = find_next_index(array, lst->index, (*data)->len_b);
-	pos_b = node_pos(*((*data)->lst_b), next_index, 1);
-	best_rotate = node_best_rotate(data, pos_a, pos_b);
-	//ft_printf("operations: %d\n", lst->operations);
-	shift_array(array, lst->index, next_index, (*data)->len_b);
-	if (lstb == NULL)
+	lst_a = *((*data)->lst_a);
+	while (lst_a->operations != find_least_op(*((*data)->lst_a)))
+		lst_a = lst_a->next;
+	next_index = find_next_index(array, lst_a->index, (*data)->len_b);
+	best_rotate = lst_a->direction;
+	shift_array(array, lst_a->index, next_index, (*data)->len_b);
+	if (*((*data)->lst_b) == NULL)
 		return ;
 	if (next_index == 0)
 		next_index = array[0];
-	//ft_printf("BEST ROTATE %d\n", best_rotate);
-	//ft_printf("Choosen LIST: %d\n", lst->operations);
-	//ft_lst_print_nbr((**data).lst_a, "LIST A\n");
 	if (best_rotate == 0)
-		handler_both_r(&data, lst->index, next_index);
+		handler_both_r(&data, lst_a->index, next_index);
 	else if (best_rotate == 1)
-		handler_a_r_b_rr(&data, lst->index, next_index);
+		handler_a_r_b_rr(&data, lst_a->index, next_index);
 	else if (best_rotate == 2)
-		handler_a_rr_b_r(&data, lst->index, next_index);
+		handler_a_rr_b_r(&data, lst_a->index, next_index);
 	else
-		handler_both_rr(&data, lst->index, next_index);
+		handler_both_rr(&data, lst_a->index, next_index);
+}
+
+static void	move_to_highest(t_data **data, int *array)
+{
+	int		last_i;
+	int		pos_last;
+	int		direction;
+	t_stack	***lst;
+
+	lst = &(*data)->lst_b;
+	last_i = array[0];
+	pos_last = node_pos(*((*data)->lst_b), last_i, 1);
+	if ((*data)->len_b / 2 > pos_last)
+		direction = 0;
+	else
+		direction = 1;
+	while ((*(*lst))->index != last_i)
+	{
+		//ft_printf("index: %d\n", (*(*lst))->index);
+		if (direction == 0)
+		{
+			ft_rotate(&((*data)->lst_b));
+			ft_printf("rb\n");
+		}
+		else
+		{
+			ft_reverse_rotate(&((*data)->lst_b));
+			ft_printf("rrb\n");
+		}
+	}
+	while ((*data)->len_b > 0)
+	{
+		ft_push(&((*data)->lst_a), &((*data)->lst_b));
+		(*data)->len_b--;
+		ft_printf("pa\n");
+	}	
 }
 
 void	main_sort(t_data *data)
 {
 	int		*array;
-	stack	*lst_a;
 
-	lst_a = *(data->lst_a);
 	array = ft_calloc(data->len_a, sizeof(int));
 	if (!array)
 		return ;
@@ -120,8 +121,10 @@ void	main_sort(t_data *data)
 		add_operation_count(&data, array);
 		node_move(&data, array);
 		ft_push(&(data->lst_b), &(data)->lst_a);
+		ft_printf("pb\n");
 		data->len_a--;
 		data->len_b++;
-		lst_a = *(data->lst_a);
 	}
+	//ft_lst_print_nbr(data->lst_b, "LIST B!\n");
+	move_to_highest(&data, array);
 }

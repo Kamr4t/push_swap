@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 13:34:10 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/25 14:23:03 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/26 16:41:10 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	main(int argc, char **argv)
 {
-	stack	*lst_a;
-	stack	*lst_b;
+	t_stack	*lst_a;
+	t_stack	*lst_b;
 	t_data	data;
 	
 	lst_b = NULL;
@@ -30,6 +30,6 @@ int	main(int argc, char **argv)
 	find_index(&data);
 	main_sort(&data);
 	//ft_printf("Operations: %d\n", operation_counter() - 1);
-	//ft_lst_print_nbr(&lst_b, "LIST B!\n");
+	//ft_lst_print_nbr(&lst_a, "LIST A!\n");
 	return (0);
 }
