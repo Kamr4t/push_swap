@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 11:11:50 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/25 13:28:38 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/25 15:10:57 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,15 @@ static void	node_move(t_data **data, int *array)
 	next_index = find_next_index(array, lst->index, (*data)->len_b);
 	pos_b = node_pos(*((*data)->lst_b), next_index, 1);
 	best_rotate = node_best_rotate(data, pos_a, pos_b);
-	ft_printf("best rotate: %d\n", best_rotate);
+	//ft_printf("operations: %d\n", lst->operations);
 	shift_array(array, lst->index, next_index, (*data)->len_b);
 	if (lstb == NULL)
 		return ;
 	if (next_index == 0)
 		next_index = array[0];
+	//ft_printf("BEST ROTATE %d\n", best_rotate);
+	//ft_printf("Choosen LIST: %d\n", lst->operations);
+	//ft_lst_print_nbr((**data).lst_a, "LIST A\n");
 	if (best_rotate == 0)
 		handler_both_r(&data, lst->index, next_index);
 	else if (best_rotate == 1)

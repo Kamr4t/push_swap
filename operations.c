@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 15:05:37 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/25 10:35:44 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/25 15:10:08 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_push(stack ***lst_dest, stack ***lst_source)
 	**lst_source = tmp->next;
 	tmp->next = **lst_dest;
 	**lst_dest = tmp;
-	operation_counter();
+	ft_printf("pb\n");
 }
 
 void	ft_rotate(stack ***lst)
