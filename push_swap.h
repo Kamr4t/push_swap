@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 13:35:34 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/25 13:26:50 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/26 12:58:49 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@
 #include <stdbool.h>
 
 //direction:
-//  1 = rotate
-// -1 = reverse rotate
+// 0 = both r
+// 1 = a r / b rr
+// 2 = a rr / b r
+// 3 = both rr
 typedef struct	stack {
 	int				nbr;
 	int				index;
@@ -72,3 +74,4 @@ void	main_sort(t_data *data);
 //operation count
 void	add_operation_count(t_data **data, int *array);
 int		least_operations(int pos_a, int a_len, int pos_b, int b_len);
+int		max(int a, int b);

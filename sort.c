@@ -6,18 +6,11 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 11:11:50 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/25 15:10:57 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/26 12:58:24 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-//while lst look for least operation count
-//if first in lst a push to b
-//else
-//write function that returns best rotation way for a and b
-//use operation handler? that rotate do needed position and both if needed
-//rotate und both nodes in position
 
 static int	find_least_op(stack *lst)
 {
@@ -42,10 +35,10 @@ static int	node_best_rotate(t_data **data, int pos_a, int pos_b)
 
 	len_a = (*data)->len_a;
 	len_b = (*data)->len_b;
-	results[0] = pos_a - pos_b;
-	results[1] = pos_a - (pos_b - len_b);
-	results[2] = (pos_a  - len_a) - pos_b;
-	results[3] = (pos_a  - len_a) - (pos_b - len_b);
+	results[0] = max(pos_a, pos_b);
+	results[1] = pos_a + (len_b - pos_b);
+	results[2] = (len_a - pos_a) + pos_b;
+	results[3] = max(len_a - pos_a, len_b - pos_b);
 	i = 0;
 	while (i < 4)
 	{
