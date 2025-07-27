@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 09:42:03 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/26 16:38:03 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/27 10:22:40 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,31 +28,28 @@ static void	move_array(int *array, int nbr, int i)
 	array[i + j] = nbr;
 }
 
-static void	insert_array(int *array, int nbr, int len)
+static void	insert_array(int *array, int nbr)
 {
-	int		i;
+	int			i;
+	static int	used_slots = 0;
 
 	i = 0;
-	while (i < len)
+	while (i < used_slots)
 	{
-		if (array[i] == 0)
-		{
-			array[i] = nbr;
-			break ;
-		}
-		else if (nbr < array[i])
+		if (nbr < array[i])
 		{
 			move_array(array, nbr, i);
-			break ;
+			used_slots++;
+			return ;
 		}
 		i++;
 	}
+	used_slots++;
+	array[i] = nbr;
 }
 
 static int	*sort_array(t_stack *lst, int lst_len)
 {
-	//does not handle 0 correct
-	//int	used_slots???
 	int		*array;
 
 	array = ft_calloc(lst_len, sizeof(int));
@@ -60,7 +57,7 @@ static int	*sort_array(t_stack *lst, int lst_len)
 		return (NULL);
 	while (lst)
 	{
-		insert_array(array, lst->nbr, lst_len);
+		insert_array(array, lst->nbr);
 		lst = lst->next;
 	}
 	return (array);
@@ -79,7 +76,7 @@ static void	fill_index(t_stack ***lst, int *array, int len)
 		{
 			if (tmp->nbr == array[i])
 			{
-				tmp->index = i;
+				tmp->index = i + 1;
 				break ;
 			}
 			i++;

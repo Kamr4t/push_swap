@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 13:35:34 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/26 16:37:34 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/27 10:57:51 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,13 @@ typedef struct s_data {
 
 //main			1
 int		main(int argc, char **argv);
+void	free_lst(t_stack **lst);
 
 //operation handler
 void	handler_both_r(t_data ***data, int index, int next_index);
 void	handler_a_r_b_rr(t_data ***data, int index, int next_index);
 void	handler_a_rr_b_r(t_data ***data, int index, int next_index);
 void	handler_both_rr(t_data ***data, int index, int next_index);
-
-//debugging		2
-void	ft_lst_print_nbr(t_stack **lst, char *lst_name);
-void	ft_print_array(int *array, int len);
-int		operation_counter(void);
 
 //create list	3
 t_stack	*create_list(int argc, char **argv);
@@ -57,6 +53,7 @@ int		is_sorted(t_stack *lst);
 int		lst_len(t_data *data);
 int		node_pos(t_stack *lst, int value, int lst_member);
 int		find_next_index(int *array, int index, int lst_len);
+void	rotate_to_highest(t_data ***data, int direction, int last_i);
 
 //find index
 void	find_index(t_data *data);
@@ -71,3 +68,8 @@ void	main_sort(t_data *data);
 
 //operation count
 void	add_operation_count(t_data **data, int *array);
+
+//debugging
+//void	ft_print_lst(t_stack **lst, char *lst_name);
+// void	ft_print_array(int *array, int len);
+// int		operation_counter(void);

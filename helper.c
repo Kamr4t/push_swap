@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 13:25:19 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/26 16:35:59 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/27 10:44:11 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,4 +95,24 @@ int	find_next_index(int *array, int index, int lst_len)
 	if (next_index == 0 && !is_zero)
 		return (array[0]);
 	return (next_index);
+}
+
+void	rotate_to_highest(t_data ***data, int direction, int last_i)
+{
+	t_stack	***lst;
+
+	lst = &(*(*data))->lst_b;
+	while ((*(*lst))->index != last_i)
+	{
+		if (direction == 0)
+		{
+			ft_rotate(&((*(*data))->lst_b));
+			ft_printf("rb\n");
+		}
+		else
+		{
+			ft_reverse_rotate(&((*(*data))->lst_b));
+			ft_printf("rrb\n");
+		}
+	}
 }

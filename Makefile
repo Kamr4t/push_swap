@@ -5,14 +5,14 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 MY_SOURCES =	main.c \
-				debugging.c \
 				helper.c \
 				create_stack.c \
 				find_index.c \
 				operations.c \
 				sort.c \
 				operation_count.c \
-				operation_handler.c
+				operation_handler.c \
+				#debugging.c
 
 MY_OBJECTS = $(MY_SOURCES:.c=.o)
 

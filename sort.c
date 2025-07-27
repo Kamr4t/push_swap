@@ -6,16 +6,12 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 11:11:50 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/26 16:42:24 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/27 10:44:26 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-//index 0 is not in the correct position
-//lot of clean up
-//malloc and free
-//0 as a number doesnt work
-//norminette
+
 static int	find_least_op(t_stack *lst)
 {
 	int		least_op;
@@ -87,26 +83,13 @@ static void	move_to_highest(t_data **data, int *array)
 		direction = 0;
 	else
 		direction = 1;
-	while ((*(*lst))->index != last_i)
-	{
-		//ft_printf("index: %d\n", (*(*lst))->index);
-		if (direction == 0)
-		{
-			ft_rotate(&((*data)->lst_b));
-			ft_printf("rb\n");
-		}
-		else
-		{
-			ft_reverse_rotate(&((*data)->lst_b));
-			ft_printf("rrb\n");
-		}
-	}
+	rotate_to_highest(&data, direction, last_i);
 	while ((*data)->len_b > 0)
 	{
 		ft_push(&((*data)->lst_a), &((*data)->lst_b));
 		(*data)->len_b--;
 		ft_printf("pa\n");
-	}	
+	}
 }
 
 void	main_sort(t_data *data)
@@ -125,6 +108,6 @@ void	main_sort(t_data *data)
 		data->len_a--;
 		data->len_b++;
 	}
-	//ft_lst_print_nbr(data->lst_b, "LIST B!\n");
 	move_to_highest(&data, array);
+	free (array);
 }
