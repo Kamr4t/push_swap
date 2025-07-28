@@ -6,11 +6,24 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 15:05:09 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/27 10:51:57 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/28 14:15:26 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	array_free(char **array)
+{
+	int	i;
+
+	i = 0;
+	while (array[i])
+	{
+		free (array[i]);
+		i++;
+	}
+	free (array);
+}
 
 static void	lst_addback(t_stack *lst, t_stack *new_node)
 {
@@ -64,15 +77,15 @@ t_stack	*create_list(int argc, char **argv)
 			i++;
 		}
 	}
-	else if (argc == 2)
+	else
 	{
-		array = ft_split(argv[1], ' ');
-		i = 0;
-		while (array[i] != NULL)
+		array = ft_split(argv[i], ' ');
+		while (array[i - 1] != NULL)
 		{
-			lst = lst_new_node_add(lst, array[i]);
+			lst = lst_new_node_add(lst, array[i - 1]);
 			i++;
 		}
+		array_free(array);
 	}
 	return (lst);
 }

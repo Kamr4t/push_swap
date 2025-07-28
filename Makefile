@@ -12,6 +12,7 @@ MY_SOURCES =	main.c \
 				sort.c \
 				operation_count.c \
 				operation_handler.c \
+				is_valid.c \
 				#debugging.c
 
 MY_OBJECTS = $(MY_SOURCES:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 11:11:50 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/27 10:44:26 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/28 15:35:23 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	main_sort(t_data *data)
 {
 	int		*array;
 
+	find_index(&data);
 	array = ft_calloc(data->len_a, sizeof(int));
 	if (!array)
 		return ;

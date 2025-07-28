@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 09:42:03 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/27 10:22:40 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/28 15:37:13 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,15 +85,15 @@ static void	fill_index(t_stack ***lst, int *array, int len)
 	}
 }
 
-void	find_index(t_data *data)
+void	find_index(t_data **data)
 {
 	int	*array;
 
-	data->len_a = lst_len(data);
-	data->len_b = 0;
-	array = sort_array(*(data->lst_a), data->len_a);
+	(*data)->len_a = lst_len(*data);
+	(*data)->len_b = 0;
+	array = sort_array(*((*data)->lst_a), (*data)->len_a);
 	if (!array)
 		return ;
-	fill_index(&(data)->lst_a, array, data->len_a);
+	fill_index(&((*data))->lst_a, array, (*data)->len_a);
 	free (array);
 }

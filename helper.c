@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 13:25:19 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/27 10:44:11 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/28 16:58:40 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	is_sorted(t_stack *lst)
 }
 
 //lst_member
-// 0 = nbr
 // 1 = index
 // 2 = operations
 int	node_pos(t_stack *lst, int value, int lst_member)

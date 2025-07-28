@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 13:34:10 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/27 10:58:02 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/28 15:35:12 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,12 @@ int	main(int argc, char **argv)
 	lst_b = NULL;
 	if (argc < 2)
 		return (0);
-	else
-		lst_a = create_list(argc, argv);
+	if (!is_valid(argc, argv))
+	{
+		ft_printf("Error!");
+		return (0);
+	}
+	lst_a = create_list(argc, argv);
 	if (!lst_a)
 		return (0);
 	if (is_sorted(lst_a))
@@ -45,7 +49,6 @@ int	main(int argc, char **argv)
 	}
 	data.lst_a = &lst_a;
 	data.lst_b = &lst_b;
-	find_index(&data);
 	main_sort(&data);
 	free_lst(&lst_a);
 	return (0);

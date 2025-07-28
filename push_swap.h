@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 13:35:34 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/27 10:57:51 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/28 15:36:47 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ typedef struct s_data {
 int		main(int argc, char **argv);
 void	free_lst(t_stack **lst);
 
+//is valid
+bool	is_valid(int argc, char **argv);
+
 //operation handler
 void	handler_both_r(t_data ***data, int index, int next_index);
 void	handler_a_r_b_rr(t_data ***data, int index, int next_index);
@@ -47,6 +50,7 @@ void	handler_both_rr(t_data ***data, int index, int next_index);
 
 //create list	3
 t_stack	*create_list(int argc, char **argv);
+void	array_free(char **array);
 
 //helper		2
 int		is_sorted(t_stack *lst);
@@ -56,7 +60,7 @@ int		find_next_index(int *array, int index, int lst_len);
 void	rotate_to_highest(t_data ***data, int direction, int last_i);
 
 //find index
-void	find_index(t_data *data);
+void	find_index(t_data **data);
 
 //operations
 void	ft_push(t_stack ***lst_dest, t_stack ***lst_source);
