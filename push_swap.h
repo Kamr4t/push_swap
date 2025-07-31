@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 13:35:34 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/28 15:36:47 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/31 19:00:37 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "libft/printf/ft_printf.h"
 #include <stdlib.h>
 #include <stdbool.h>
+#include <limits.h>
 
 //direction:
 // 0 = both r
@@ -36,44 +37,49 @@ typedef struct s_data {
 }	t_data;
 
 //main			1
-int		main(int argc, char **argv);
-void	free_lst(t_stack **lst);
+int			main(int argc, char **argv);
+void		free_lst(t_stack **lst);
 
 //is valid
-bool	is_valid(int argc, char **argv);
+bool		is_valid(int argc, char **argv);
 
 //operation handler
-void	handler_both_r(t_data ***data, int index, int next_index);
-void	handler_a_r_b_rr(t_data ***data, int index, int next_index);
-void	handler_a_rr_b_r(t_data ***data, int index, int next_index);
-void	handler_both_rr(t_data ***data, int index, int next_index);
+void		handler_both_r(t_data ***data, int index, int next_index);
+void		handler_a_r_b_rr(t_data ***data, int index, int next_index);
+void		handler_a_rr_b_r(t_data ***data, int index, int next_index);
+void		handler_both_rr(t_data ***data, int index, int next_index);
 
 //create list	3
-t_stack	*create_list(int argc, char **argv);
-void	array_free(char **array);
+t_stack		*create_list(int argc, char **argv);
+void		array_free(char **array);
+int			lst_len(t_data *data);
 
 //helper		2
-int		is_sorted(t_stack *lst);
-int		lst_len(t_data *data);
-int		node_pos(t_stack *lst, int value, int lst_member);
-int		find_next_index(int *array, int index, int lst_len);
-void	rotate_to_highest(t_data ***data, int direction, int last_i);
+int			node_pos(t_stack *lst, int value, int lst_member);
+int			find_next_index(int *array, int index, int lst_len);
+void		rotate_to_highest(t_data ***data, int direction, int last_i);
+bool		check_int(long long nbr);
+long long	ft_atoi_long(const char *nptr);
 
 //find index
-void	find_index(t_data **data);
+void		find_index(t_data **data);
 
 //operations
-void	ft_push(t_stack ***lst_dest, t_stack ***lst_source);
-void	ft_rotate(t_stack ***lst);
-void	ft_reverse_rotate(t_stack ***lst);
+void		ft_push(t_stack ***lst_dest, t_stack ***lst_source);
+void		ft_rotate(t_stack ***lst);
+void		ft_reverse_rotate(t_stack ***lst);
+void		ft_swap(t_stack ***lst);
 
 //sort
-void	main_sort(t_data *data);
+void		main_sort(t_data *data);
 
 //operation count
-void	add_operation_count(t_data **data, int *array);
+void		add_operation_count(t_data **data, int *array);
+
+//sort small
+void		sort_loop(t_data **data);
 
 //debugging
-//void	ft_print_lst(t_stack **lst, char *lst_name);
+// void	ft_print_lst(t_stack *lst, char *lst_name);
 // void	ft_print_array(int *array, int len);
 // int		operation_counter(void);

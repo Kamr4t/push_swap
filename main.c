@@ -6,11 +6,27 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 13:34:10 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/28 15:35:12 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/31 20:02:34 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+static int	is_sorted(t_stack *lst)
+{
+	int	tmp;
+
+	tmp = lst->nbr;
+	lst = lst->next;
+	while (lst)
+	{
+		if (tmp > lst->nbr)
+			return (0);
+		tmp = lst->nbr;
+		lst = lst->next;
+	}
+	return (1);
+}
 
 void	free_lst(t_stack **lst)
 {
@@ -36,7 +52,7 @@ int	main(int argc, char **argv)
 		return (0);
 	if (!is_valid(argc, argv))
 	{
-		ft_printf("Error!");
+		ft_printf("Error!\n");
 		return (0);
 	}
 	lst_a = create_list(argc, argv);

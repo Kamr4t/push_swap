@@ -6,104 +6,121 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 16:50:58 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/28 18:35:40 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/31 20:03:59 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	next_index_pos(t_stack *lst, int index, int len)
+void	ft_rotate_w(t_stack ***lst)
 {
-	int	pos;
-	int	next_index;
+	t_stack	*first;
+	t_stack	*last;
 
-	pos = 1;
-	if (index == len)
-		nexT_index = 1;
-	else
-		next_index = index + 1;
+	if (!lst || !*lst || !**lst || !(**lst)->next)
+		return ;
+	first = **lst;
+	last = **lst;
+	while (last->next != NULL)
+		last = last->next;
+	**lst = first->next;
+	first->next = NULL;
+	last->next = first;
+	ft_printf("ra\n");
+}
+
+void	ft_reverse_rotate_w(t_stack ***lst)
+{
+	t_stack	*prev;
+	t_stack	*last;
+
+	if (!lst || !*lst || !**lst || !(**lst)->next)
+		return ;
+	prev = NULL;
+	last = **lst;
+	while (last->next)
+	{
+		prev = last;
+		last = last->next;
+	}
+	prev->next = NULL;
+	last->next = **lst;
+	**lst = last;
+	ft_printf("rra\n");
+}
+
+static void	check_order(t_data ***data, t_stack *lst, int len)
+{
+	int	tmp;
+
+	tmp = lst->index;
 	lst = lst->next;
-	if (lst->index == index - 1)
-		return (0);
-	if (index == 1 && lst->index == len)
-		return (0);
-	while (lst->index != next_index)
+	if (tmp == len && lst->index != tmp - 2)
 	{
-		lst = lst->next;
-		pos++;
+		ft_swap(&((*(*data))->lst_a));
+		ft_reverse_rotate_w(&((*(*data))->lst_a));
 	}
-	return (pos);
+	else if (tmp == len && lst->index == tmp - 2)
+		ft_rotate_w(&((*(*data))->lst_a));
+	else if (tmp == len - 1 && lst->index == len)
+		ft_reverse_rotate_w(&((*(*data))->lst_a));
+	else if (tmp == len - 1 && lst->index == tmp - 1)
+		ft_swap(&((*(*data))->lst_a));
+	else
+	{
+		ft_rotate_w(&((*(*data))->lst_a));
+		ft_swap(&((*(*data))->lst_a));
+		ft_reverse_rotate_w(&((*(*data))->lst_a));
+	}
 }
 
-static int	node_wrong_pos(t_data *data, int len)
+static void	rotate_a(t_data ***data, int len, int index)
 {
-	t_stack	*lst;
-	int		index;
+	t_stack	***lst_a;
+	int		pos;
 
-	lst = ;
-	if (lst->index != 1)
-		return (lst->index);
-	while (lst)
+	lst_a = &((*(*data))->lst_a);
+	pos = node_pos((*(*lst_a)), index, 1);
+	if (pos <= len / 2)
 	{
-		index = lst->index;
-		lst = lst->next;
-		if (!lst)
-			return (0);
-		if (index == len)
-			if (lst->index != 1)
-				return (index);
-		else
-			if (index + 1 != lst->index)
-				return (index);
-	}
-	return (0);
-}
-
-//use rotate handler??
-static void	rotate_a(t_stack *lst, int len, int pos)
-{
-	if (pos < len / 2)
-	{
-		while()
+		while ((*(*lst_a))->index != index)
 		{
-			ft_rotate();
+			ft_printf("ra\n");
+			ft_rotate(&((*(*data))->lst_a));
 		}
 	}
 	else
 	{
-		while()
+		while ((*(*lst_a))->index != index)
 		{
-			ft_reverse_rotate();
+			ft_printf("rra\n");
+			ft_reverse_rotate(&((*(*data))->lst_a));
 		}
 	}
 }
 
-static void	later()
+void	sort_loop(t_data **data)
 {
-	int	index_to_move;
-
-	while ()
-	{
-		index_to_move = node_wrong_pos();
-		if (!index_to_move)
-			return ;
-		if (next_index_pos()) == 0 || next_index_pos() == 2)
-		{
-			ft_swap();
-		}
-		else
-		{
-			ft_push(to b);
-			rotate_a();
-			ft_push(to a);
-		}
-	}
-}
-
-void	sort_small(t_data **data)
-{
+	int	i;
 	int	len;
 
-	later();
-	rotate_a();
+	len = (*data)->len_a;
+	i = 1;
+	while (len - i >= 3)
+	{
+		rotate_a(&data, (*data)->len_a, i);
+		ft_push(&((*data)->lst_b), &((*data)->lst_a));
+		ft_printf("pb\n");
+		i++;
+	}
+	if ((*data)->len_a >= 3)
+		check_order(&data, *((*data)->lst_a), (*data)->len_a);
+	else
+		ft_swap(&((*data)->lst_a));
+	while (i > 1)
+	{
+		ft_push(&((*data)->lst_a), &((*data)->lst_b));
+		ft_printf("pa\n");
+		i--;
+	}
 }

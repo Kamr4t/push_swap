@@ -6,41 +6,44 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 13:25:19 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/28 16:58:40 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/31 20:17:13 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	lst_len(t_data *data)
+long long	ft_atoi_long(const char *nptr)
 {
-	int		i;
-	t_stack	*lst;
+	size_t		i;
+	int			n;
+	long long	nbr;
 
 	i = 0;
-	lst = *(data->lst_a);
-	while (lst)
-	{
+	n = 1;
+	while (nptr[i] == 32 || (nptr[i] >= 9 && nptr[i] <= 13))
 		i++;
-		lst = lst->next;
+	if (nptr[i] == '-' || nptr[i] == '+')
+	{
+		if (nptr[i] == '-')
+			n = -1;
+		i++;
 	}
-	return (i);
+	nbr = 0;
+	while (nptr[i] >= '0' && nptr[i] <= '9')
+	{
+		nbr = nbr * 10 + (nptr[i] - 48);
+		i++;
+	}
+	return (nbr * n);
 }
 
-int	is_sorted(t_stack *lst)
+bool	check_int(long long nbr)
 {
-	int	tmp;
-
-	tmp = lst->nbr;
-	lst = lst->next;
-	while (lst)
-	{
-		if (tmp > lst->nbr)
-			return (0);
-		tmp = lst->nbr;
-		lst = lst->next;
-	}
-	return (1);
+	if (nbr > INT_MAX)
+		return (false);
+	if (nbr < INT_MIN)
+		return (false);
+	return (true);
 }
 
 //lst_member

@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 14:49:23 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/28 16:10:32 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/31 20:00:18 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,39 +49,37 @@ static bool	check_duplicated_n(int *array, int nbr)
 	return (true);
 }
 
-static bool	check_single_argv(char **argv, int *digit_array)
+static bool	check_single_argv(char **array, int *digit_array)
 {
-	char	**array;
-	int		i;
-	int		j;
-	int		nbr;
-	
-	array = ft_split(argv[1], ' ');
+	int			i;
+	int			j;
+	long long	nbr;
+
 	i = 0;
 	while (array[i])
 	{
 		j = 0;
 		while (array[i][j])
 		{
-			if (!ft_isdigit(array[i][j]))
+			if (!ft_isdigit(array[i][j]) && array[i][j] != '-')
 				return (false);
 			j++;
 		}
-		nbr = ft_atoi(array[i]);
+		nbr = ft_atoi_long(array[i]);
+		if (!check_int(nbr))
+			return (false);
 		if (!check_duplicated_n(digit_array, nbr))
 			return (false);
 		i++;
 	}
-	array_free(array);
-	free (digit_array);
 	return (true);
 }
 
 static bool	check_multi_argv(int argc, char **argv, int *digit_array)
 {
-	int		i;
-	int		j;
-	int		nbr;
+	int			i;
+	int			j;
+	long long	nbr;
 
 	i = 1;
 	while (i < argc)
@@ -89,36 +87,44 @@ static bool	check_multi_argv(int argc, char **argv, int *digit_array)
 		j = 0;
 		while (argv[i][j])
 		{
-			if (!ft_isdigit(argv[i][j]))
+			if (!ft_isdigit(argv[i][j]) && argv[i][j] != '-')
 				return (false);
 			j++;
 		}
-		nbr = ft_atoi(argv[i]);
+		nbr = ft_atoi_long(argv[i]);
+		if (!check_int(nbr))
+			return (false);
 		if (!check_duplicated_n(digit_array, nbr))
 			return (false);
 		i++;
 	}
-	free (digit_array);
 	return (true);
 }
 
 bool	is_valid(int argc, char **argv)
 {
+	char	**array;
 	int		*digit_array;
 	int		digit_count;
+	bool	is_valid;
 
+	is_valid = true;
+	array = NULL;
 	if (argc == 2)
 	{
+		array = ft_split(argv[1], ' ');
 		digit_count = count_nbr(argv[1]);
 		digit_array = malloc(digit_count * sizeof(int));
-		if (!check_single_argv(argv, digit_array))
-			return (false);
+		if (!check_single_argv(array, digit_array))
+			is_valid = false;
+		array_free(array);
 	}
 	else
 	{
 		digit_array = malloc(argc * sizeof(int));
 		if (!check_multi_argv(argc, argv, digit_array))
-			return (false);
+			is_valid = false;
 	}
-	return (true);
+	free (digit_array);
+	return (is_valid);
 }

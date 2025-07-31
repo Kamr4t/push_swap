@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 11:11:50 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/28 15:35:23 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/31 20:24:53 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,15 +100,22 @@ void	main_sort(t_data *data)
 	array = ft_calloc(data->len_a, sizeof(int));
 	if (!array)
 		return ;
-	while (data->len_a > 0)
+	if (data->len_a > 5)
 	{
-		add_operation_count(&data, array);
-		node_move(&data, array);
-		ft_push(&(data->lst_b), &(data)->lst_a);
-		ft_printf("pb\n");
-		data->len_a--;
-		data->len_b++;
+		while (data->len_a > 0)
+		{
+			add_operation_count(&data, array);
+			node_move(&data, array);
+			ft_push(&(data->lst_b), &(data)->lst_a);
+			ft_printf("pb\n");
+			data->len_a--;
+			data->len_b++;
+		}
+		move_to_highest(&data, array);
 	}
-	move_to_highest(&data, array);
+	else 
+	{
+		sort_loop(&data);
+	}
 	free (array);
 }

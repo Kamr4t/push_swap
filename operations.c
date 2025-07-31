@@ -6,11 +6,24 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 15:05:37 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/26 16:26:38 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/31 11:16:14 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	ft_swap(t_stack ***lst)
+{
+	t_stack	*first;
+	t_stack	*second;
+
+	first = **lst;
+	second = first->next;
+	first->next = second->next;
+	second->next = first;
+	**lst = second;
+	ft_printf("sa\n");
+}
 
 void	ft_push(t_stack ***lst_dest, t_stack ***lst_source)
 {

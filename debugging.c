@@ -6,7 +6,7 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 17:12:17 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/27 10:48:30 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/31 16:07:34 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 
 #include "push_swap.h"
 
-void	ft_print_lst(t_stack **lst, char *lst_name)
+void	ft_print_lst(t_stack *lst, char *lst_name)
 {
 	t_stack	*tmp;
 
-	if (!*lst)
+	if (!lst)
 		return ;
-	tmp = *lst;
+	tmp = lst;
 	ft_printf("%s\n", lst_name);
 	while (tmp)
 	{

@@ -6,19 +6,19 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 09:42:03 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/28 15:37:13 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/31 20:27:11 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	move_array(int *array, int nbr, int i)
+static void	move_array(int *array, int nbr, int i, int used_slots)
 {
 	int	j;
 	int	tmp;
 
 	j = 0;
-	while (array[i + j] != 0)
+	while (i + j < used_slots)
 	{
 		tmp = array[i + j];
 		array[i + j] = nbr;
@@ -38,7 +38,7 @@ static void	insert_array(int *array, int nbr)
 	{
 		if (nbr < array[i])
 		{
-			move_array(array, nbr, i);
+			move_array(array, nbr, i, used_slots);
 			used_slots++;
 			return ;
 		}

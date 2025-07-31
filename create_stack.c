@@ -6,11 +6,26 @@
 /*   By: ancamara <ancamara@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 15:05:09 by ancamara          #+#    #+#             */
-/*   Updated: 2025/07/28 14:15:26 by ancamara         ###   ########.fr       */
+/*   Updated: 2025/07/31 18:52:18 by ancamara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	lst_len(t_data *data)
+{
+	int		i;
+	t_stack	*lst;
+
+	i = 0;
+	lst = *(data->lst_a);
+	while (lst)
+	{
+		i++;
+		lst = lst->next;
+	}
+	return (i);
+}
 
 void	array_free(char **array)
 {
